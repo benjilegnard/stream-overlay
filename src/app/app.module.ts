@@ -1,5 +1,6 @@
 import {
   BrowserModule,
+  BrowserTransferStateModule,
   makeStateKey,
   TransferState,
 } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { isPlatformServer } from '@angular/common';
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserTransferStateModule,
   ],
   providers: [
     {
@@ -22,7 +24,6 @@ import { isPlatformServer } from '@angular/common';
         platformId: string,
         transferState: TransferState
       ) => {
-        console.log('config', envConfigSSR);
         const stateKey = makeStateKey<EnvConfig>('envConfig');
         if (isPlatformServer(platformId)) {
           transferState.set(stateKey, envConfigSSR);
