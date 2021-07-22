@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { EnvConfig, ENV_CONFIG } from './core/model/env-config.model';
 import { isPlatformServer } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
+import { ChatModule } from './chat/chat.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserTransferStateModule,
     HttpClientModule,
     SharedModule,
+    ChatModule,
   ],
   providers: [
     {
