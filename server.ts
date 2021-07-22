@@ -2,7 +2,11 @@ import 'zone.js/node';
 require('dotenv').config();
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+import * as http from 'http';
 import { join } from 'path';
+import * as WebSocket from 'ws';
+
+import TwitchJs, { Chat, GlobalUserStateMessage } from 'twitch-js';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
@@ -53,8 +57,23 @@ function run(): void {
   const port = process.env.PORT || 4000;
 
   // Start up the Node server
-  const server = app();
-  server.listen(port, () => {
+  const expressApp = app();
+  const server = http.createServer(expressApp);
+  const wss = new WebSocket.Server({ server });
+wss.on('connection', (ws: WebSocket) => {
+
+    //connection is up, let's add a simple simple event
+    ws.on('message', (message: string) => {
+
+        //log the received message and send it back to the client
+        console.log('received: %s', message);
+        ws.send(`Hello, you sent -> ${message}`);
+    });
+
+    //send immediatly a feedback to the incoming connection    
+    ws.send('Hi there, I am a WebSocket server');
+});
+server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }

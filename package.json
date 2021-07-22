@@ -32,6 +32,7 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "twitch-js": "^2.0.0-beta.42",
+    "ws": "^6.2.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -49,6 +50,7 @@
     "@types/express": "^4.17.0",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.11.1",
+    "@types/ws": "^7.4.7",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "codelyzer": "^6.0.0",
