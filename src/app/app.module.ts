@@ -10,12 +10,14 @@ import { AppComponent } from './app.component';
 import { EnvConfig, ENV_CONFIG } from './core/model/env-config.model';
 import { isPlatformServer } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
+    HttpClientModule,
     SharedModule,
   ],
   providers: [

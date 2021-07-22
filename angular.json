@@ -31,7 +31,10 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "allowedCommonJsDependencies": [
+               "twitch-js/es"
+            ]
           },
           "configurations": {
             "production": {
