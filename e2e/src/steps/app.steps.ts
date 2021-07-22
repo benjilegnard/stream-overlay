@@ -10,11 +10,14 @@ Before(() => {
 });
 
 Given(/^I am on the home page$/, async () => {
-  await page.navigateTo();
+  return await page.navigateTo();
 });
 
-When(/^I do nothing$/, () => {});
+When(/^I do nothing$/, () => {
+  return 'success';
+});
 
 Then(/^I should see the title$/, async () => {
-  expect(await page.getTitleText()).toEqual('stream-overlay app is running!');
+  const title = await page.getTitleText();
+  expect(title).toEqual('stream-overlay app is running!');
 });
