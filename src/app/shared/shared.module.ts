@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackgroundComponent } from './components/background/background.component';
+import { TwitchService } from './services/twitch.service';
 
 
 
@@ -11,6 +12,7 @@ import { BackgroundComponent } from './components/background/background.componen
   exports: [
     BackgroundComponent
   ],
+  providers: [TwitchService],
   imports: [
     CommonModule
   ]

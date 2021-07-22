@@ -17,6 +17,7 @@ import { EnvConfig } from './core/model/env-config.model';
         return {
           twitchUsername: process.env.TWITCH_USERNAME,
           twitchClientID: process.env.TWITCH_CLIENT_ID,
+          twitchClientSecret: process.env.TWITCH_CLIENT_SECRET,
         } as EnvConfig;
       },
     },
