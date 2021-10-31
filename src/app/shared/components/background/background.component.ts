@@ -15,9 +15,9 @@ import {
 } from '@angular/core';
 
 const MAIN_COLOR = 'rgba(255, 255, 255, 0.25)';
-const NUMBER_OF_POINTS = 48;
+const NUMBER_OF_POINTS = 64;
 const SPEED = 2;
-const LINE_WIDTH = 0.5;
+const LINE_WIDTH = 0.25;
 const CIRCLE_RADIUS = 6;
 
 export interface Point {
@@ -66,20 +66,24 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
           this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
           this.points.forEach((point: Point) => {
             this.movePoint(point);
-            this.drawPoint(point);
             this.collisionDetector(point);
           });
           const points = this.pointsToCoordsArray(this.points);
-          const delaunator = Delaunator.from(points);
-          const { triangles } = delaunator;
+          this.delaunator = Delaunator.from(points);
+          const { triangles } = this.delaunator;
+          let j = 0;
           for (let i = 0; i < triangles.length; i += 3) {
+
             this.drawTriangle(
               points[triangles[i]],
               points[triangles[i + 1]],
-              points[triangles[i + 2]]
+              points[triangles[i + 2]],
             );
+            j++;
           }
-          console.log("triangles", triangles.length)
+          this.points.forEach((point: Point) => {
+            this.drawPoint(point);
+          });
           requestAnimationFrame(animate);
         };
         requestAnimationFrame(animate);
@@ -108,14 +112,14 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
   drawPoint(point: Point) {
     this.context.beginPath();
     this.context.arc(point.x, point.y, CIRCLE_RADIUS, 0, 2 * Math.PI);
-    this.context.fillStyle = MAIN_COLOR;
+    this.context.fillStyle = 'white';
     this.context.fill();
   }
 
   drawTriangle(
     firstPoint: [number, number],
     secondPoint: [number, number],
-    thirdPoint: [number, number]
+    thirdPoint: [number, number],
   ) {
     this.context.strokeStyle = MAIN_COLOR;
     this.context.lineWidth = LINE_WIDTH;
