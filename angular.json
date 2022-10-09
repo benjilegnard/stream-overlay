@@ -81,10 +81,9 @@
             "browserTarget": "stream-overlay:build"
           }
         },
-        "test": {                          
+        "test": {
           "builder": "@angular-builders/jest:run",
-          "options": {
-          }
+          "options": {}
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
@@ -147,8 +146,21 @@
           "configurations": {
             "production": {}
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "stream-overlay"
+    }
+  },
+  "defaultProject": "stream-overlay",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
