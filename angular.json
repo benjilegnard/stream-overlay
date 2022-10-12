@@ -81,10 +81,6 @@
             "browserTarget": "stream-overlay:build"
           }
         },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {}
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {

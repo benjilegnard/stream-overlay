@@ -1,5 +1,5 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import Delaunator from 'delaunator';
+import type Delaunator from 'delaunator';
 import {
   AfterViewInit,
   Component,
@@ -58,35 +58,36 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
   ) {}
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('ngAfterViewInit');
-      this.canvas = this.canvasRef.nativeElement;
-      this.context = this.canvas.getContext('2d');
-      this.zone.runOutsideAngular(() => {
-        const animate = (frameStamp: number) => {
-          this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-          this.points.forEach((point: Point) => {
-            this.movePoint(point);
-            this.collisionDetector(point);
-          });
-          const points = this.pointsToCoordsArray(this.points);
-          this.delaunator = Delaunator.from(points);
-          const { triangles } = this.delaunator;
-          let j = 0;
-          for (let i = 0; i < triangles.length; i += 3) {
-
-            this.drawTriangle(
-              points[triangles[i]],
-              points[triangles[i + 1]],
-              points[triangles[i + 2]],
-            );
-            j++;
-          }
-          this.points.forEach((point: Point) => {
-            this.drawPoint(point);
-          });
+      import('delaunator').then((delaunatorModule) => {
+        const Delaunator = delaunatorModule.default;
+        this.canvas = this.canvasRef.nativeElement;
+        this.context = this.canvas.getContext('2d');
+        this.zone.runOutsideAngular(() => {
+          const animate = (frameStamp: number) => {
+            this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            this.points.forEach((point: Point) => {
+              this.movePoint(point);
+              this.collisionDetector(point);
+            });
+            const points = this.pointsToCoordsArray(this.points);
+            this.delaunator = Delaunator.from(points);
+            const { triangles } = this.delaunator;
+            let j = 0;
+            for (let i = 0; i < triangles.length; i += 3) {
+              this.drawTriangle(
+                points[triangles[i]],
+                points[triangles[i + 1]],
+                points[triangles[i + 2]]
+              );
+              j++;
+            }
+            this.points.forEach((point: Point) => {
+              this.drawPoint(point);
+            });
+            requestAnimationFrame(animate);
+          };
           requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
+        });
       });
     }
   }
@@ -100,7 +101,7 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
       this.canvasHeight = window.innerHeight;
       this.points = this.generateRandomPoints();
       this.coords = this.pointsToCoordsArray(this.points);
-      this.delaunator = Delaunator.from(this.coords);
+      //this.delaunator = Delaunator.from(this.coords);
     }
   }
 
@@ -119,7 +120,7 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
   drawTriangle(
     firstPoint: [number, number],
     secondPoint: [number, number],
-    thirdPoint: [number, number],
+    thirdPoint: [number, number]
   ) {
     this.context.strokeStyle = MAIN_COLOR;
     this.context.lineWidth = LINE_WIDTH;
@@ -167,10 +168,10 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
     });
     // add a point for each corner
     // top left
-    coords.push([0,0])
-    coords.push([this.canvasWidth, 0])
-    coords.push([this.canvasWidth, this.canvasHeight])
-    coords.push([0, this.canvasHeight])
+    coords.push([0, 0]);
+    coords.push([this.canvasWidth, 0]);
+    coords.push([this.canvasWidth, this.canvasHeight]);
+    coords.push([0, this.canvasHeight]);
     return coords;
   }
 }
