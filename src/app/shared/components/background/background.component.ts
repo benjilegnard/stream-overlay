@@ -7,10 +7,8 @@ import {
   HostListener,
   Inject,
   NgZone,
-  OnChanges,
   OnInit,
   PLATFORM_ID,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 
@@ -33,12 +31,14 @@ export type Coords = Array<[number, number]>;
   templateUrl: './background.component.html',
   styleUrls: ['./background.component.css'],
 })
-export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
+export class BackgroundComponent implements OnInit, AfterViewInit {
   public canvasWidth: number;
   public canvasHeight: number;
+
   private delaunator: Delaunator;
   private points: Point[];
   private coords: Coords;
+
   @ViewChild('canvasElement')
   private canvasRef: ElementRef;
   private canvas: HTMLCanvasElement;
@@ -54,8 +54,10 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: string,
+    @Inject(DOCUMENT) private document: Document,
     private zone: NgZone
   ) {}
+
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       import('delaunator').then((delaunatorModule) => {
@@ -64,26 +66,8 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
         this.context = this.canvas.getContext('2d');
         this.zone.runOutsideAngular(() => {
           const animate = (frameStamp: number) => {
-            this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-            this.points.forEach((point: Point) => {
-              this.movePoint(point);
-              this.collisionDetector(point);
-            });
-            const points = this.pointsToCoordsArray(this.points);
-            this.delaunator = Delaunator.from(points);
-            const { triangles } = this.delaunator;
-            let j = 0;
-            for (let i = 0; i < triangles.length; i += 3) {
-              this.drawTriangle(
-                points[triangles[i]],
-                points[triangles[i + 1]],
-                points[triangles[i + 2]]
-              );
-              j++;
-            }
-            this.points.forEach((point: Point) => {
-              this.drawPoint(point);
-            });
+            this.move();
+            this.draw(Delaunator);
             requestAnimationFrame(animate);
           };
           requestAnimationFrame(animate);
@@ -91,23 +75,48 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
       });
     }
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('onChanges');
-  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.canvasWidth = window.innerWidth;
-      this.canvasHeight = window.innerHeight;
+      this.canvasWidth = this.document.defaultView.innerWidth;
+      this.canvasHeight = this.document.defaultView.innerHeight;
       this.points = this.generateRandomPoints();
       this.coords = this.pointsToCoordsArray(this.points);
-      //this.delaunator = Delaunator.from(this.coords);
+      // this.delaunator = Delaunator.from(this.coords);
     }
+  }
+
+  move() {
+    this.points.forEach((point: Point) => {
+      this.movePoint(point);
+      this.detectCollisions(point);
+    });
   }
 
   movePoint(point: Point) {
     point.x += point.v.x * SPEED;
     point.y += point.v.y * SPEED;
+  }
+
+  draw(Delaunator: Delaunator) {
+    // reset canvas on each frame
+    this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+    const points = this.pointsToCoordsArray(this.points);
+    this.delaunator = Delaunator.from(points);
+    const { triangles } = this.delaunator;
+    let j = 0;
+    for (let i = 0; i < triangles.length; i += 3) {
+      this.drawTriangle(
+        points[triangles[i]],
+        points[triangles[i + 1]],
+        points[triangles[i + 2]]
+      );
+      j++;
+    }
+    this.points.forEach((point: Point) => {
+      this.drawPoint(point);
+    });
   }
 
   drawPoint(point: Point) {
@@ -134,7 +143,7 @@ export class BackgroundComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Change direction of a point when they reach screen limits
    */
-  collisionDetector(point: Point) {
+  detectCollisions(point: Point) {
     if (point.x < 0 || point.x > this.canvasWidth) {
       point.v.x = -point.v.x;
     }
