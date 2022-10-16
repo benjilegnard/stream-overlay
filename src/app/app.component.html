@@ -1,4 +1,4 @@
-<h1 class="stream-title">{{ title }} is streaming!</h1>
+<h1 class="stream-title widget">{{ title }} is streaming!</h1>
 <nav id="social-media-toolbar">
   <a href="https://twitter.com/benjilegnard">Twitter</a>
   <a href="https://facebook.com/benjilegnard">Facebook</a>
@@ -13,3 +13,6 @@
 <canvas id="avatar-view"></canvas>
 <div class="song-playing"></div>
 <app-background></app-background>
+<div class="scene-name widget">
+  {{ sceneName$ | async }}
+</div>
