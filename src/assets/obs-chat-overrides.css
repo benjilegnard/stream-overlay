@@ -5,7 +5,7 @@
  *
  * It will change the style of the twitch popup window :
  * @see https://www.twitch.tv/popout/benjilegnard/chat?popout
- * 
+ *
  */
 
 /* custom font */
@@ -57,6 +57,8 @@ span[data-test-selector="chat-line-message-body"] {
   font-size: 1.4rem;
   padding: 0.25rem;
   position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .chat-line__username-container::after {
   content: " ";
@@ -68,4 +70,17 @@ span[data-test-selector="chat-line-message-body"] {
   border-color: transparent transparent black black;
   height: 0;
   top: 0;
+}
+
+.chat-line__message-container{
+  animation-duration: 0.3s;
+  animation-name: animate-fade;
+  animation-fill-mode: backwards;
+  transition: all;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes animate-fade {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
 }
