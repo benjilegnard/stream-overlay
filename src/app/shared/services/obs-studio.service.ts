@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,8 +11,13 @@ export class ObsStudioService {
 
   private obsstudio: typeof obsstudio;
 
-  constructor(@Inject(DOCUMENT) document: Document) {
+  constructor(@Inject(DOCUMENT) document: Document, @Inject(PLATFORM_ID) platformId) {
     this.obsstudio = document.defaultView.obsstudio;
+    if (isPlatformBrowser(platformId)) {
+      document.defaultView.addEventListener("obsSceneChanged", (event) => {
+        this.sceneChanged$.next(event.detail)
+      })
+    }
   }
 
   getCurrentScene() {
