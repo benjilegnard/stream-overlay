@@ -82,7 +82,6 @@ export class BackgroundComponent implements OnInit, AfterViewInit {
       this.canvasHeight = this.document.defaultView.innerHeight;
       this.points = this.generateRandomPoints();
       this.coords = this.pointsToCoordsArray(this.points);
-      // this.delaunator = Delaunator.from(this.coords);
     }
   }
 
@@ -176,11 +175,26 @@ export class BackgroundComponent implements OnInit, AfterViewInit {
       coords.push([current.x, current.y]);
     });
     // add a point for each corner
-    // top left
-    coords.push([0, 0]);
+    coords.push([0, 0]); // top left
     coords.push([this.canvasWidth, 0]);
-    coords.push([this.canvasWidth, this.canvasHeight]);
+    coords.push([this.canvasWidth, this.canvasHeight]); // bottom right
     coords.push([0, this.canvasHeight]);
+
+    // add points to a third of vertical lines
+    coords.push([0, this.canvasHeight*2/3]);
+    coords.push([0, this.canvasHeight/3]);
+
+    coords.push([this.canvasWidth, this.canvasHeight*2/3]);
+    coords.push([this.canvasWidth, this.canvasHeight/3]);
+
+    // add points to a fourth of horizontal lines
+    coords.push([this.canvasWidth/4, 0]);
+    coords.push([this.canvasWidth/2, 0]);
+    coords.push([this.canvasWidth*3/4, 0]);
+
+    coords.push([this.canvasWidth/4, this.canvasHeight]);
+    coords.push([this.canvasWidth/2, this.canvasHeight]);
+    coords.push([this.canvasWidth*3/4, this.canvasHeight]);
     return coords;
   }
 }
