@@ -1,0 +1,47 @@
+/*
+
+This is some overrides styles to display a spotify "now playing* widget in OBS.
+
+To do so:
+- add a browser view in OBS to url https://open.spotify.com
+- login with your account
+- keep the width at 800px to avoid the mobile responsive view
+- paste this file contents in Custom CSS field.
+
+*/
+html,
+body {
+  background-color: rgba(0, 0, 0, 0);
+  margin: 0px auto;
+  overflow: hidden;
+}
+
+/* hide stuff */
+.Root__top-bar,
+.Root__nav-bar,
+.Root__main-view,
+.player-controls,
+.volume-bar,
+.control-button,
+.control-button-heart,
+.mwpJrmCgLlVkJVtWjlI1,
+.gQoa8JTSpjSmYyABcag2.T3hkVxXuSbCYOD2GIeQd {
+  display: none;
+}
+
+/* make now playing bar transparent */
+.Root__now-playing-bar footer {
+  background-color: transparent;
+  border: none;
+}
+
+/** artist and track display fonts */
+.Root__now-playing-bar .hGXzYa,
+.Root__now-playing-bar .eEALRg {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: -1px -1px 1px black, 1px 1px 1px black, 1px -1px 1px black,
+    -1px 1px 1px black;
+  color: white;
+  text-decoration: none;
+}
