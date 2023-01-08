@@ -9,6 +9,8 @@ To do so:
 - paste this file contents in Custom CSS field.
 
 */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
 html,
 body {
   background-color: rgba(0, 0, 0, 0);
@@ -38,8 +40,9 @@ body {
 /** artist and track display fonts */
 .Root__now-playing-bar .hGXzYa,
 .Root__now-playing-bar .eEALRg {
+  font-family: "Poppins", sans-serif;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1em;
   text-shadow: -1px -1px 1px black, 1px 1px 1px black, 1px -1px 1px black,
     -1px 1px 1px black;
   color: white;
