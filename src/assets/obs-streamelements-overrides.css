@@ -1,0 +1,28 @@
+/**
+ * This file contains overrides for the streamelements alerts overlay.
+ *
+ * It is intended to be pasted in a Browser View inside obs studio.
+ */
+body {
+  background-color: rgba(0, 0, 0, 0);
+  margin: 0px auto;
+  overflow: hidden;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+body > * {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+}
+
+/* hide images */
+.alert-box .media img,
+.alert-box .media video
+{
+  display: none;
+  opacity: 0;
+}
+/* add transparent background to alert box */
+.alert-box {
+  background-color: rgba(0,0,0,.5);
+}
