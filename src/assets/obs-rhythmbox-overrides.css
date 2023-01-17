@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+html,
+body {
+  background-color: rgba(0, 0, 0, 0);
+  margin: 0px auto;
+  overflow: hidden;
+}
+div.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  max-width: none;
+  margin: 0;
+    width: 100%
+}
+.pure-u-1-1 {
+  flex: 0 0 auto;
+  display: flex;
+  width: auto;
+}
+.pure-u-1-1:nth-of-type(2){
+    flex: 1 1 auto;
+}
+img.albumart{margin: 1rem;}
+div#status,
+div#trackbits,
+div#trackposition {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+div#trackimage {
+  margin: 0;
+}
+div#trackbits,
+div#trackimage,
+div#playerbuttons {
+  height: 40%;
+}
+div#seekbar,
+#connection {
+  display: none;
+}
+div#playerbuttons {
+  border: none;
+}
+div#playerbuttons .pure-g {
+  display: none;
+  flex-direction: column;
+}
+div#trackbits {
+  color: white;
+    direction: rtl;
+  text-shadow: 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black,
+    -2px -2px 0 black;
+    text-align: left;
+    font-size: 2rem;
+white-space: nowrap;
+
+}
+div#trackbits div:nth-of-type(2n) {
+  display: none;
+}
+div#trackbits #tracktitle {
+    font-size: 2.5rem;
+}
+div#trackimage{
+    max-width: 220px;
+}
+form#connectform button{
+  content: "ok";
+}
+
