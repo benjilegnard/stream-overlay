@@ -1,10 +1,10 @@
 import 'zone.js/node';
 require('dotenv').config();
 import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
+import express from 'express';
 import { join } from 'path';
 
-import { AppServerModule } from './src/main.server';
+import bootstrap from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { EnvConfig } from 'src/app/core/model/env-config.model';
@@ -21,7 +21,7 @@ export function app(): express.Express {
   server.engine(
     'html',
     ngExpressEngine({
-      bootstrap: AppServerModule,
+      bootstrap,
     })
   );
 

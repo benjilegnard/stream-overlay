@@ -27,9 +27,10 @@ export interface Point {
 export type Coords = Array<[number, number]>;
 
 @Component({
-  selector: 'app-background',
-  templateUrl: './background.component.html',
-  styleUrls: ['./background.component.css'],
+    selector: 'app-background',
+    templateUrl: './background.component.html',
+    styleUrls: ['./background.component.css'],
+    standalone: true,
 })
 export class BackgroundComponent implements OnInit, AfterViewInit {
   public canvasWidth: number;
