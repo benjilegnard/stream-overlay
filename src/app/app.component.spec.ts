@@ -5,7 +5,7 @@ import { BackgroundComponent } from './shared/components/background/background.c
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+      imports: [
         AppComponent,
         BackgroundComponent,
       ],
