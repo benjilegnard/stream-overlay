@@ -11,7 +11,7 @@ describe('BackgroundComponent', () => {
   let context: Partial<CanvasRenderingContext2D>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BackgroundComponent],
+      imports: [BackgroundComponent],
     }).compileComponents();
     window = TestBed.inject(DOCUMENT).defaultView;
     context = {
