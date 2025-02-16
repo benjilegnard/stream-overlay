@@ -7,29 +7,24 @@ import { TransferState } from '@angular/core';
 import { ENV_CONFIG, EnvConfig } from './core/model/env-config.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  imports: [BackgroundComponent, AsyncPipe],
-  standalone: true,
-  providers: [
-    {
-      provide: ENV_CONFIG,
-      useFactory: (
-        envConfigSSR: EnvConfig,
-        platformId: string,
-        transferState: TransferState
-      ) => {
-        const stateKey = makeStateKey<EnvConfig>('envConfig');
-        if (isPlatformServer(platformId)) {
-          transferState.set(stateKey, envConfigSSR);
-          return envConfigSSR;
-        }
-        return transferState.get<EnvConfig>(stateKey, {});
-      },
-      deps: ['ENV_CONFIG_SSR', PLATFORM_ID, TransferState],
-    },
-  ],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [BackgroundComponent, AsyncPipe],
+    providers: [
+        {
+            provide: ENV_CONFIG,
+            useFactory: (envConfigSSR: EnvConfig, platformId: string, transferState: TransferState) => {
+                const stateKey = makeStateKey<EnvConfig>('envConfig');
+                if (isPlatformServer(platformId)) {
+                    transferState.set(stateKey, envConfigSSR);
+                    return envConfigSSR;
+                }
+                return transferState.get<EnvConfig>(stateKey, {});
+            },
+            deps: ['ENV_CONFIG_SSR', PLATFORM_ID, TransferState],
+        },
+    ]
 })
 export class AppComponent implements OnInit {
   title = 'benjilegnard';
