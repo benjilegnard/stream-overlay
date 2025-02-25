@@ -7,6 +7,7 @@ import {
 	inject,
 	OnInit,
 	PLATFORM_ID,
+	viewChild,
 	ViewChild,
 } from '@angular/core';
 import {BACKGROUND_DRAWER} from '../../services/background-drawer.token';
@@ -38,7 +39,6 @@ import {HexagonBackground} from '../../services/backgrounds/hexagon-background';
 			}
 		`,
 	],
-	standalone: true,
 	providers: [
 		{provide: BACKGROUND_DRAWER, useClass: HexagonBackground},
 		//   {provide: BACKGROUND_DRAWER, useClass: DelaunayBackground}
@@ -48,8 +48,10 @@ export class BackgroundComponent implements OnInit, AfterViewInit {
 	public canvasWidth: number;
 	public canvasHeight: number;
 
-	@ViewChild('canvasElement')
-	private canvasRef: ElementRef;
+	// @ViewChild('canvasElement')
+	private canvasRef = viewChild('canvasElement', {
+		read: ElementRef,
+	});
 
 	@HostListener('window:resize', ['$event'])
 	public windowResize(event: Event) {
@@ -65,7 +67,7 @@ export class BackgroundComponent implements OnInit, AfterViewInit {
 		if (isPlatformBrowser(this.platformId)) {
 			const {innerWidth, innerHeight} = this.document.defaultView;
 
-			const context = this.canvasRef.nativeElement.getContext('2d');
+			const context = this.canvasRef().nativeElement.getContext('2d');
 			this.backgroundDrawer.initialize(context, innerWidth, innerHeight);
 		}
 	}

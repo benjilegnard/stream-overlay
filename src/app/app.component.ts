@@ -102,7 +102,6 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 			}
 		`,
 	],
-	styleUrls: ['./app.component.scss'],
 	imports: [BackgroundComponent, AsyncPipe],
 	providers: [
 		{
