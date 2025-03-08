@@ -8,7 +8,6 @@ import {
 	OnInit,
 	PLATFORM_ID,
 	viewChild,
-	ViewChild,
 } from '@angular/core';
 import {BACKGROUND_DRAWER} from '../../services/background-drawer.token';
 import {DelaunayBackground} from '../../services/backgrounds/delaunay-background.service';
@@ -41,14 +40,13 @@ import {HexagonBackground} from '../../services/backgrounds/hexagon-background';
 	],
 	providers: [
 		{provide: BACKGROUND_DRAWER, useClass: HexagonBackground},
-		//   {provide: BACKGROUND_DRAWER, useClass: DelaunayBackground}
+		{provide: 'BACKGROUND_DRAWER2', useClass: DelaunayBackground},
 	],
 })
 export class BackgroundComponent implements OnInit, AfterViewInit {
 	public canvasWidth: number;
 	public canvasHeight: number;
 
-	// @ViewChild('canvasElement')
 	private canvasRef = viewChild('canvasElement', {
 		read: ElementRef,
 	});
