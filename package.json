@@ -13,16 +13,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.1.7",
-    "@angular/common": "^19.1.7",
-    "@angular/compiler": "^19.1.7",
-    "@angular/core": "^19.1.7",
-    "@angular/forms": "^19.1.7",
-    "@angular/platform-browser": "^19.1.7",
-    "@angular/platform-browser-dynamic": "^19.1.7",
-    "@angular/platform-server": "^19.1.7",
-    "@angular/router": "^19.1.7",
-    "@angular/ssr": "^19.1.8",
+    "@angular/animations": "^19.2.1",
+    "@angular/common": "^19.2.1",
+    "@angular/compiler": "^19.2.1",
+    "@angular/core": "^19.2.1",
+    "@angular/forms": "^19.2.1",
+    "@angular/platform-browser": "^19.2.1",
+    "@angular/platform-browser-dynamic": "^19.2.1",
+    "@angular/platform-server": "^19.2.1",
+    "@angular/router": "^19.2.1",
+    "@angular/ssr": "^19.2.1",
     "delaunator": "^5.0.1",
     "dotenv": "^8.6.0",
     "express": "^4.21.2",
@@ -31,14 +31,16 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.1.8",
-    "@angular-eslint/builder": "19.1.0",
-    "@angular-eslint/eslint-plugin": "19.1.0",
-    "@angular-eslint/eslint-plugin-template": "19.1.0",
-    "@angular-eslint/schematics": "19.1.0",
-    "@angular-eslint/template-parser": "19.1.0",
-    "@angular/cli": "^19.1.8",
-    "@angular/compiler-cli": "^19.1.7",
+    "@angular-devkit/build-angular": "^19.2.1",
+    "@angular-eslint/builder": "19.2.0",
+    "@angular-eslint/eslint-plugin": "19.2.0",
+    "@angular-eslint/eslint-plugin-template": "19.2.0",
+    "@angular-eslint/schematics": "19.2.0",
+    "@angular-eslint/template-parser": "19.2.0",
+    "@angular/cli": "^19.2.1",
+    "@angular/compiler-cli": "^19.2.1",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.22.0",
     "@happy-dom/jest-environment": "^16.5.3",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.14",
@@ -46,10 +48,17 @@
     "@types/obs-studio": "^2.17.2",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
-    "eslint": "^8.57.1",
+    "angular-eslint": "^19.2.1",
+    "eslint": "^9.22.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.5.0",
     "ts-node": "^9.1.1",
-    "typescript": "~5.5.4"
+    "typescript": "~5.5.4",
+    "typescript-eslint": "^8.26.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild@<=0.24.2": ">=0.25.0"
+    }
   }
 }
