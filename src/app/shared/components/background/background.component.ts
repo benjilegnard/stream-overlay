@@ -12,6 +12,7 @@ import {
 import {BACKGROUND_DRAWER} from '../../services/background-drawer.token';
 import {DelaunayBackground} from '../../services/backgrounds/delaunay-background.service';
 import {HexagonBackground} from '../../services/backgrounds/hexagon-background';
+import {ClosestNodeBackground} from '../../services/backgrounds/closest-node-background.service';
 
 @Component({
 	selector: 'app-background',
@@ -39,8 +40,9 @@ import {HexagonBackground} from '../../services/backgrounds/hexagon-background';
 		`,
 	],
 	providers: [
-		{provide: BACKGROUND_DRAWER, useClass: HexagonBackground},
-		{provide: 'BACKGROUND_DRAWER2', useClass: DelaunayBackground},
+		//{provide: BACKGROUND_DRAWER, useClass: HexagonBackground},
+		//{provide: 'BACKGROUND_DRAWER2', useClass: DelaunayBackground},
+		{provide: BACKGROUND_DRAWER, useClass: ClosestNodeBackground},
 	],
 })
 export class BackgroundComponent implements OnInit, AfterViewInit {

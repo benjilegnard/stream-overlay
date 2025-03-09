@@ -2,7 +2,7 @@ import {Component, OnInit, PLATFORM_ID, makeStateKey} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {ObsStudioService} from './shared/services/obs-studio.service';
 import {BackgroundComponent} from './shared/components/background/background.component';
-import {AsyncPipe, isPlatformServer} from '@angular/common';
+import {isPlatformServer} from '@angular/common';
 import {TransferState} from '@angular/core';
 import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 
@@ -102,7 +102,7 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 			}
 		`,
 	],
-	imports: [BackgroundComponent, AsyncPipe],
+	imports: [BackgroundComponent],
 	providers: [
 		{
 			provide: ENV_CONFIG,
