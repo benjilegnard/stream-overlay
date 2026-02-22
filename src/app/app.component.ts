@@ -2,7 +2,7 @@ import {Component, OnInit, PLATFORM_ID, makeStateKey} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {ObsStudioService} from './shared/services/obs-studio.service';
 import {BackgroundComponent} from './shared/components/background/background.component';
-import {isPlatformServer} from '@angular/common';
+import {AsyncPipe, isPlatformServer} from '@angular/common';
 import {TransferState} from '@angular/core';
 import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 
@@ -35,7 +35,7 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 				font-size: 14px;
 				color: white;
 				box-sizing: border-box;
-				-webkit-font-smoothing: antialiased;
+				webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 			}
 
@@ -55,7 +55,8 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 			}
 
 			.widget {
-				background-color: black;
+				background-color: var(--color-crust);
+				color: var(--color-text);
 				padding: 0 0.5em;
 				line-height: 2em;
 				font-size: 2em;
@@ -76,18 +77,20 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 					width: 0;
 					height: 0;
 					border: 1em solid black;
-					border-color: black transparent transparent black;
+					border-color: var(--color-crust) transparent transparent
+						var(--color-crust);
 				}
 			}
 
 			.scene-name {
+				display: none;
 				font-family: 'Poppins', sans-serif;
 				text-transform: uppercase;
 				position: absolute;
 				bottom: 0;
 				right: 0;
 				width: auto;
-				color: white;
+				color: var(--color-text);
 				height: 2em;
 				font-size: 1rem;
 				&::after {
@@ -97,12 +100,13 @@ import {ENV_CONFIG, EnvConfig} from './core/model/env-config.model';
 					width: 0;
 					height: 0;
 					border: 1em solid black;
-					border-color: transparent black black transparent;
+					border-color: transparent var(--color-crust) var(--color-crust)
+						transparent;
 				}
 			}
 		`,
 	],
-	imports: [BackgroundComponent],
+	imports: [BackgroundComponent, AsyncPipe],
 	providers: [
 		{
 			provide: ENV_CONFIG,

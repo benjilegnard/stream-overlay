@@ -2,7 +2,7 @@ import {inject, NgZone} from '@angular/core';
 import {BackgroundDrawer} from '../background-drawer.token';
 
 const NUMBER_OF_POINTS = 256;
-const SPEED = 1;
+const SPEED = 2;
 const CIRCLE_RADIUS = 3;
 const MAX_DISTANCE = 175;
 const LINE_WIDTH = 2;
