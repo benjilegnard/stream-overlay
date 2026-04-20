@@ -1,13 +1,14 @@
-import {DOCUMENT, isPlatformBrowser} from '@angular/common';
+import {isPlatformBrowser} from '@angular/common';
 import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	HostListener,
-	inject,
-	OnInit,
-	PLATFORM_ID,
-	viewChild,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+  viewChild,
+  DOCUMENT
 } from '@angular/core';
 import {BACKGROUND_DRAWER} from '../../services/background-drawer.token';
 import {DelaunayBackground} from '../../services/backgrounds/delaunay-background.service';
