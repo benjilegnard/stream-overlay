@@ -55,7 +55,8 @@ import { ENV_CONFIG, EnvConfig } from './core/model/env-config.model';
       }
 
       .widget {
-        background-color: black;
+        background-color: var(--color-crust);
+        color: var(--color-text);
         padding: 0 0.5em;
         line-height: 2em;
         font-size: 2em;
@@ -76,7 +77,7 @@ import { ENV_CONFIG, EnvConfig } from './core/model/env-config.model';
           width: 0;
           height: 0;
           border: 1em solid black;
-          border-color: black transparent transparent black;
+          border-color: var(--color-crust) transparent transparent var(--color-crust);
         }
       }
 
@@ -87,7 +88,7 @@ import { ENV_CONFIG, EnvConfig } from './core/model/env-config.model';
         bottom: 0;
         right: 0;
         width: auto;
-        color: white;
+        color: var(--color-text);
         height: 2em;
         font-size: 1rem;
         &::after {
@@ -97,7 +98,7 @@ import { ENV_CONFIG, EnvConfig } from './core/model/env-config.model';
           width: 0;
           height: 0;
           border: 1em solid black;
-          border-color: transparent black black transparent;
+          border-color: transparent var(--color-crust) var(--color-crust) transparent;
         }
       }
     `,
