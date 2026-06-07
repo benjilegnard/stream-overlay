@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 import { DelaunayBackground, Point } from './delaunay-background.service';
 
 import type Delaunator from 'delaunator';
@@ -10,13 +11,13 @@ describe('DelaunayBackground', () => {
     TestBed.configureTestingModule({ providers: [DelaunayBackground] });
 
     context = {
-      beginPath: jest.fn(),
-      arc: jest.fn(),
-      fill: jest.fn(),
-      moveTo: jest.fn(),
-      lineTo: jest.fn(),
-      stroke: jest.fn(),
-      clearRect: jest.fn(),
+      beginPath: vi.fn(),
+      arc: vi.fn(),
+      fill: vi.fn(),
+      moveTo: vi.fn(),
+      lineTo: vi.fn(),
+      stroke: vi.fn(),
+      clearRect: vi.fn(),
     };
     component = TestBed.inject(DelaunayBackground);
     component.initialize(context as CanvasRenderingContext2D, 1024, 768);
@@ -48,8 +49,8 @@ describe('DelaunayBackground', () => {
       // prepare
       const point: Point = { x: 50, y: 50, v: { x: 0, y: 0 } };
       component['points'] = [point];
-      const movePointSpy = jest.spyOn(component, 'movePoint');
-      const detectCollisionsSpy = jest.spyOn(component, 'detectCollisions');
+      const movePointSpy = vi.spyOn(component, 'movePoint');
+      const detectCollisionsSpy = vi.spyOn(component, 'detectCollisions');
       // execute
       component.move();
       // verify
@@ -60,15 +61,15 @@ describe('DelaunayBackground', () => {
   describe('draw', () => {
     it('should compute triangles and draw all points', () => {
       // prepare
-      jest.spyOn(component, 'pointsToCoordsArray').mockReturnValue([
+      vi.spyOn(component, 'pointsToCoordsArray').mockReturnValue([
         [0, 0],
         [10, 0],
         [0, 10],
       ]);
-      const drawTriangleSpy = jest.spyOn(component, 'drawTriangle');
+      const drawTriangleSpy = vi.spyOn(component, 'drawTriangle');
       component['context'] = context as CanvasRenderingContext2D;
-      const delaunatorMock: Delaunator = {
-        from: jest.fn().mockReturnValue({ triangles: [0, 1, 2] }),
+      const delaunatorMock: Pick<typeof Delaunator, 'from'> = {
+        from: vi.fn().mockReturnValue({ triangles: [0, 1, 2] }),
       };
       // execute
       component.draw(delaunatorMock);

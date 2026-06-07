@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 
 import { ObsStudioService } from './obs-studio.service';
 
@@ -27,7 +28,7 @@ describe('ObsStudioService', () => {
   describe('when obsstudio is defined', () => {
     beforeEach(() => {
       obsMock = {
-        getCurrentScene: jest.fn().mockImplementation((callback: (value: OBSSceneInfo) => void) => {
+        getCurrentScene: vi.fn().mockImplementation((callback: (value: OBSSceneInfo) => void) => {
           callback({
             width: 1920,
             height: 1080,
@@ -40,14 +41,15 @@ describe('ObsStudioService', () => {
       window['obsstudio'] = obsMock;
       service = TestBed.inject(ObsStudioService);
     });
-    it('then getScene should return empty', (done: jest.DoneCallback) => {
-      // prepare
-      service.sceneChanged$.subscribe((value) => {
-        expect(value).toBeDefined();
-        done();
-      });
-      // execute
-      service.getCurrentScene();
-    });
+    it('then getScene should return empty', () =>
+      new Promise<void>((resolve) => {
+        // prepare
+        service.sceneChanged$.subscribe((value) => {
+          expect(value).toBeDefined();
+          resolve();
+        });
+        // execute
+        service.getCurrentScene();
+      }));
   });
 });

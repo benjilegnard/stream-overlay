@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 
 import { BackgroundComponent } from './background.component';
 import { BACKGROUND_DRAWER, BackgroundDrawer } from '../../services/background-drawer.token';
@@ -11,8 +11,8 @@ describe('BackgroundComponent', () => {
 
   beforeEach(async () => {
     drawerStub = {
-      initialize: jest.fn(),
-      resize: jest.fn(),
+      initialize: vi.fn(),
+      resize: vi.fn(),
     };
     await TestBed.configureTestingModule({
       imports: [BackgroundComponent],

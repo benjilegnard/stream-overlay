@@ -3,6 +3,9 @@ import { BackgroundDrawer } from '../background-drawer.token';
 
 import type Delaunator from 'delaunator';
 
+// `draw` only needs the static `from` factory off the Delaunator class.
+type DelaunatorFactory = Pick<typeof Delaunator, 'from'>;
+
 const MAIN_COLOR = 'rgba(255, 255, 255, 0.25)';
 const NUMBER_OF_POINTS = 64;
 const SPEED = 2;
@@ -21,7 +24,7 @@ export class DelaunayBackground implements BackgroundDrawer {
   public canvasWidth: number;
   public canvasHeight: number;
 
-  private delaunator: Delaunator;
+  private delaunator: Delaunator<Float64Array>;
   private points: Point[];
 
   private context: CanvasRenderingContext2D;
@@ -65,7 +68,7 @@ export class DelaunayBackground implements BackgroundDrawer {
     point.y += point.v.y * SPEED;
   }
 
-  draw(Delaunator: Delaunator) {
+  draw(Delaunator: DelaunatorFactory) {
     // reset canvas on each frame
     this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 

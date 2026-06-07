@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-jest.mock('delaunator');
 import { AppComponent } from './app.component';
 import { BackgroundComponent } from './shared/components/background/background.component';
 import { Component } from '@angular/core';
-@Component({ selector: 'app-background' })
-class BackgroundStubComponent {}
+
+
+@Component({ selector: 'app-background', template: '' })
+class BackgroundStubComponent { }
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
