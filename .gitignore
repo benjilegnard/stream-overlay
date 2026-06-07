@@ -9,6 +9,9 @@
 
 # dependencies
 /node_modules
+# this project uses pnpm; ignore other package managers' lockfiles
+package-lock.json
+yarn.lock
 
 # profiling files
 chrome-profiler-events*.json

@@ -76,14 +76,15 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
-          "options": {
-            "buildTarget": "stream-overlay:build"
-          },
           "configurations": {
             "production": {
               "buildTarget": "stream-overlay:build:production"
+            },
+            "development": {
+              "buildTarget": "stream-overlay:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "server": {
           "builder": "@angular/build:server",
