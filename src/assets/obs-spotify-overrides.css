@@ -43,7 +43,10 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 1em;
-  text-shadow: -1px -1px 1px black, 1px 1px 1px black, 1px -1px 1px black,
+  text-shadow:
+    -1px -1px 1px black,
+    1px 1px 1px black,
+    1px -1px 1px black,
     -1px 1px 1px black;
   color: white;
   text-decoration: none;

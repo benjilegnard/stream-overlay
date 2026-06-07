@@ -27,15 +27,13 @@ describe('ObsStudioService', () => {
   describe('when obsstudio is defined', () => {
     beforeEach(() => {
       obsMock = {
-        getCurrentScene: jest
-          .fn()
-          .mockImplementation((callback: (value: OBSSceneInfo) => void) => {
-            callback({
-              width: 1920,
-              height: 1080,
-              name: 'full screen with chat',
-            } as OBSSceneInfo);
-          }),
+        getCurrentScene: jest.fn().mockImplementation((callback: (value: OBSSceneInfo) => void) => {
+          callback({
+            width: 1920,
+            height: 1080,
+            name: 'full screen with chat',
+          } as OBSSceneInfo);
+        }),
       } as Partial<typeof obsstudio>;
       TestBed.configureTestingModule({});
       window = TestBed.inject(DOCUMENT).defaultView;

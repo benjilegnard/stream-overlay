@@ -12,17 +12,19 @@ div.wrapper {
   flex-direction: row;
   max-width: none;
   margin: 0;
-    width: 100%
+  width: 100%;
 }
 .pure-u-1-1 {
   flex: 0 0 auto;
   display: flex;
   width: auto;
 }
-.pure-u-1-1:nth-of-type(2){
-    flex: 1 1 auto;
+.pure-u-1-1:nth-of-type(2) {
+  flex: 1 1 auto;
 }
-img.albumart{margin: 1rem;}
+img.albumart {
+  margin: 1rem;
+}
 div#status,
 div#trackbits,
 div#trackposition {
@@ -51,24 +53,25 @@ div#playerbuttons .pure-g {
 }
 div#trackbits {
   color: white;
-    direction: rtl;
-  text-shadow: 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black,
+  direction: rtl;
+  text-shadow:
+    2px 2px 0 black,
+    -2px 2px 0 black,
+    2px -2px 0 black,
     -2px -2px 0 black;
-    text-align: left;
-    font-size: 2rem;
-white-space: nowrap;
-
+  text-align: left;
+  font-size: 2rem;
+  white-space: nowrap;
 }
 div#trackbits div:nth-of-type(2n) {
   display: none;
 }
 div#trackbits #tracktitle {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
-div#trackimage{
-    max-width: 220px;
+div#trackimage {
+  max-width: 220px;
 }
-form#connectform button{
+form#connectform button {
   content: "ok";
 }
-

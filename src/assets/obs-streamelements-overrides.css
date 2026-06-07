@@ -17,12 +17,11 @@ body > * {
 
 /* hide images */
 .alert-box .media img,
-.alert-box .media video
-{
+.alert-box .media video {
   display: none;
   opacity: 0;
 }
 /* add transparent background to alert box */
 .alert-box {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
