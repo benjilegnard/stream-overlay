@@ -10,10 +10,10 @@ import {
   viewChild,
   DOCUMENT,
 } from '@angular/core';
-import { BACKGROUND_DRAWER } from '../../services/background-drawer.token';
-import { DelaunayBackground } from '../../services/backgrounds/delaunay-background.service';
-import { HexagonBackground } from '../../services/backgrounds/hexagon-background';
-import { ClosestNodeBackground } from '../../services/backgrounds/closest-node-background.service';
+import { BACKGROUND_DRAWER } from '../../shared/services/background-drawer.token';
+import { DelaunayBackground } from '../../shared/services/backgrounds/delaunay-background.service';
+import { HexagonBackground } from '../../shared/services/backgrounds/hexagon-background';
+import { ClosestNodeBackground } from '../../shared/services/backgrounds/closest-node-background.service';
 
 @Component({
   selector: 'app-background',
@@ -35,11 +35,6 @@ import { ClosestNodeBackground } from '../../services/backgrounds/closest-node-b
         z-index: 0;
       }
     `,
-  ],
-  providers: [
-    //{provide: BACKGROUND_DRAWER, useClass: HexagonBackground},
-    //{provide: 'BACKGROUND_DRAWER2', useClass: DelaunayBackground},
-    { provide: BACKGROUND_DRAWER, useClass: ClosestNodeBackground },
   ],
 })
 export class BackgroundComponent implements OnInit, AfterViewInit {

@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 
 import { BackgroundComponent } from './background.component';
-import { BACKGROUND_DRAWER, BackgroundDrawer } from '../../services/background-drawer.token';
+import { BACKGROUND_DRAWER, BackgroundDrawer } from '../../shared/services/background-drawer.token';
+import { ClosestNodeBackground } from '../../shared/services/backgrounds/closest-node-background.service';
 
 describe('BackgroundComponent', () => {
   let component: BackgroundComponent;
@@ -16,6 +17,12 @@ describe('BackgroundComponent', () => {
     };
     await TestBed.configureTestingModule({
       imports: [BackgroundComponent],
+      providers: [
+        {
+          provide: BACKGROUND_DRAWER,
+          useValue: ClosestNodeBackground,
+        },
+      ],
     })
       .overrideComponent(BackgroundComponent, {
         set: {

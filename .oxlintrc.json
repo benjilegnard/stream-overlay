@@ -7,14 +7,10 @@
   "env": {
     "builtin": true
   },
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "**/*.ts"
-      ],
+      "files": ["**/*.ts"],
       "rules": {
         "@angular-eslint/contextual-lifecycle": "error",
         "@angular-eslint/no-empty-lifecycle-method": "error",
@@ -45,26 +41,20 @@
           }
         ]
       },
-      "jsPlugins": [
-        "@angular-eslint/eslint-plugin"
-      ],
+      "jsPlugins": ["@angular-eslint/eslint-plugin"],
       "env": {
         "es2020": true
       }
     },
     {
-      "files": [
-        "**/*.html"
-      ],
+      "files": ["**/*.html"],
       "rules": {
         "@angular-eslint/template/banana-in-box": "error",
         "@angular-eslint/template/eqeqeq": "error",
         "@angular-eslint/template/no-negated-async": "error",
         "@angular-eslint/template/prefer-control-flow": "error"
       },
-      "jsPlugins": [
-        "@angular-eslint/eslint-plugin-template"
-      ]
+      "jsPlugins": ["@angular-eslint/eslint-plugin-template"]
     }
   ]
 }

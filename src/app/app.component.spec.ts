@@ -1,23 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
-import { BackgroundComponent } from './shared/components/background/background.component';
-import { Component } from '@angular/core';
 
-
-@Component({ selector: 'app-background', template: '' })
-class BackgroundStubComponent { }
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-    })
-      .overrideComponent(AppComponent, {
-        add: {
-          imports: [BackgroundStubComponent],
-        },
-        remove: { imports: [BackgroundComponent] },
-      })
-      .compileComponents();
+      providers: [provideRouter([]), { provide: 'ENV_CONFIG_SSR', useValue: undefined }],
+    }).compileComponents();
   });
 
   it('should create the app', () => {
@@ -26,16 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'benjilegnard'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('benjilegnard');
-  });
-
-  it('should render title', () => {
+  it('should render a router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('benjilegnard');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });
