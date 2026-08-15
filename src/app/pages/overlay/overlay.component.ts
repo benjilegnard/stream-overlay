@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { ObsStudioService } from '../../shared/services/obs-studio.service';
+import { TwitchEventsService } from '../../shared/services/twitch-events.service';
 
 @Component({
   selector: 'app-overlay',
@@ -22,6 +23,22 @@ import { ObsStudioService } from '../../shared/services/obs-studio.service';
     <div class="song-playing"></div>
     <div class="scene-name widget">
       {{ sceneName$ | async }}
+    </div>
+
+    <!-- Minimal debug display of incoming Twitch events; replace with real widgets later. -->
+    <div class="twitch-debug widget">
+      @if (lastFollow$ | async; as follow) {
+        <span>follow: {{ follow.user }}</span>
+      }
+      @if (lastSubscribe$ | async; as sub) {
+        <span>sub: {{ sub.user }} (tier {{ sub.tier }})</span>
+      }
+      @if (lastCheer$ | async; as cheer) {
+        <span>cheer: {{ cheer.user }} {{ cheer.bits }} bits</span>
+      }
+      @if (lastRaid$ | async; as raid) {
+        <span>raid: {{ raid.from }} ({{ raid.viewers }})</span>
+      }
     </div>
   `,
   styles: [
@@ -104,10 +121,16 @@ import { ObsStudioService } from '../../shared/services/obs-studio.service';
 })
 export class OverlayComponent implements OnInit {
   private obs = inject(ObsStudioService);
+  private twitch = inject(TwitchEventsService);
 
   title = 'benjilegnard';
 
   sceneName$ = this.obs.sceneChanged$.pipe(map((value) => value.name));
+
+  lastFollow$ = this.twitch.follow$;
+  lastSubscribe$ = this.twitch.subscribe$;
+  lastCheer$ = this.twitch.cheer$;
+  lastRaid$ = this.twitch.raid$;
 
   ngOnInit(): void {
     this.obs.getCurrentScene();

@@ -9,6 +9,8 @@
     "test": "ng test",
     "test:ci": "ng test --no-watch --coverage",
     "lint": "ng lint",
+    "twitch:bootstrap": "node --experimental-strip-types scripts/twitch-bootstrap.ts",
+    "serve:ssr": "node dist/stream-overlay/server/server.mjs",
     "e2e": "ng e2e",
     "webdriver:update": "webdriver-manager update"
   },

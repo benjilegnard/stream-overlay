@@ -15,10 +15,12 @@ const HEXAGON_COLOR = 'rgba(255,255,255,0.15)';
 
 const SPEED = 0.4;
 
+// Lazily initialized in initialize()/resize() — must not touch `window` at
+// module load, since this file is imported during server-side rendering.
 let BOUNDARIES = {
-  x: window.innerWidth,
-  y: window.innerHeight,
-  z: window.innerWidth,
+  x: 0,
+  y: 0,
+  z: 0,
 };
 const hexagons: Hex[] = [];
 
@@ -102,6 +104,7 @@ function animate(context: CanvasRenderingContext2D, width: number, height: numbe
 }
 
 export function initialize(context: CanvasRenderingContext2D, width: number, height: number) {
+  resize();
   let radius = 100;
   for (let i = 0; i < HEX_AMOUNT; i++) {
     let x = Math.random() * window.innerWidth;

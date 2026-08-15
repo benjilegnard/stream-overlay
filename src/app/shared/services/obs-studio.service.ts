@@ -15,9 +15,10 @@ export class ObsStudioService {
   private platformId = inject(PLATFORM_ID);
 
   constructor() {
-    this.obsstudio = document.defaultView.obsstudio;
+    // Use the injected DOCUMENT (not the bare global) so this is SSR-safe.
+    this.obsstudio = this.document.defaultView?.obsstudio;
     if (isPlatformBrowser(this.platformId)) {
-      document.defaultView.addEventListener('obsSceneChanged', (event) => {
+      this.document.defaultView?.addEventListener('obsSceneChanged', (event) => {
         this.sceneChanged$.next(event.detail);
       });
     }
